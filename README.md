@@ -1,5 +1,7 @@
 # tugatobrasa 🇵🇹⇌🇧🇷
 
+🔗 **[tugatobrasa.vercel.app](https://tugatobrasa.vercel.app)** — tradução ainda não funciona até o backend ser publicado.
+
 **A mesma língua, duas conversas.** Tradutor open source de palavras, gírias e expressões entre o português de Portugal (pt-PT) e o português do Brasil (pt-BR) — com aviso de **falsos amigos**: palavras que mudam de sentido (ou viram ofensa) ao cruzar o Atlântico.
 
 > «propina» em Portugal é a mensalidade da universidade. No Brasil, é suborno. O TugaToBrasa te avisa antes de você passar vergonha.
