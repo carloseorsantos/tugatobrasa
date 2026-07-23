@@ -25,6 +25,15 @@ npm run dev        # http://localhost:3000
 
 Configure a URL da API em `.env.local` (ver `.env.example`).
 
+### Gerando os tipos da API
+
+Os tipos de `TranslateRequest`/`TranslateResponse` (`lib/api-client.ts`) são gerados a partir do contrato **real** publicado pela API rodando localmente — nunca redeclare essas interfaces à mão.
+
+```bash
+# com a API rodando em localhost:8080 (docker compose up no repo tugatobrasa-api)
+npm run generate-types
+```
+
 ## Contribuindo
 
 - **Conhece uma palavra ou gíria que falta?** Não precisa saber programar: [abra uma issue de novo termo](https://github.com/carloseorsantos/tugatobrasa-api/issues/new/choose) no repo da API.
@@ -34,9 +43,9 @@ Configure a URL da API em `.env.local` (ver `.env.example`).
 ## Roadmap
 
 - [x] Protótipo navegável + design system
-- [ ] Fase 1 — Base da API + glossário inicial (~100 pares)
-- [ ] Fase 2 — `POST /translate` + fluxo de termo não encontrado
-- [ ] Fase 3 — Esta interface consumindo a API
+- [x] Fase 1 — Base da API + glossário inicial (~100 pares)
+- [x] Fase 2 — `POST /translate` + fluxo de termo não encontrado
+- [ ] Fase 3 — Esta interface consumindo a API (em andamento)
 - [ ] Fase 4 — Tradução de frases (regras) + CI do glossário
 - [ ] Fase 5 — Página do glossário + feedback
 
