@@ -1,6 +1,6 @@
 # tugatobrasa 🇵🇹⇌🇧🇷
 
-🔗 **[tugatobrasa.vercel.app](https://tugatobrasa.vercel.app)** — tradução ainda não funciona até o backend ser publicado.
+🔗 **[tugatobrasa.vercel.app](https://tugatobrasa.vercel.app)**
 
 **A mesma língua, duas conversas.** Tradutor open source de palavras, gírias e expressões entre o português de Portugal (pt-PT) e o português do Brasil (pt-BR) — com aviso de **falsos amigos**: palavras que mudam de sentido (ou viram ofensa) ao cruzar o Atlântico.
 
@@ -47,9 +47,10 @@ npm run generate-types
 - [x] Protótipo navegável + design system
 - [x] Fase 1 — Base da API + glossário inicial (~100 pares)
 - [x] Fase 2 — `POST /translate` + fluxo de termo não encontrado
-- [ ] Fase 3 — Esta interface consumindo a API (em andamento)
+- [x] Fase 3 — Esta interface consumindo a API
 - [ ] Fase 4 — Tradução de frases (regras) + CI do glossário
 - [ ] Fase 5 — Página do glossário + feedback
+- [x] Fase 6 — Deploy (front na Vercel, API no AWS Lightsail)
 
 ## Licença
 
