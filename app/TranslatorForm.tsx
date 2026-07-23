@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import TranslationResult, { type ViewState } from "./TranslationResult";
+import type { components } from "@/lib/api-client";
 
 type Direction = "PT_TO_BR" | "BR_TO_PT";
+type TranslateResponse = components["schemas"]["TranslateResponse"];
 
 const COPY: Record<Direction, { placeholder: string; tryLabel: string; from: string; to: string }> = {
   PT_TO_BR: { placeholder: "escreve uma palavra ou gíria", tryLabel: "experimenta", from: "Portugal", to: "Brasil" },
@@ -18,24 +21,41 @@ const SUGGESTIONS: Record<Direction, string[]> = {
 export default function TranslatorForm() {
   const [direction, setDirection] = useState<Direction>("PT_TO_BR");
   const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState<ViewState>({ kind: "idle" });
 
   const copy = COPY[direction];
 
   function toggleDirection() {
     setDirection((d) => (d === "PT_TO_BR" ? "BR_TO_PT" : "PT_TO_BR"));
     setQuery("");
+    setState({ kind: "idle" });
   }
 
   async function translate(term: string) {
     const trimmed = term.trim();
     if (!trimmed) return;
     setQuery(trimmed);
-    setIsLoading(true);
-    // TODO(route handler proxy + card de resultado): troca por fetch real e renderiza
-    // success/not_found/error — por ora só demonstra o estado de loading funcionando.
-    await new Promise((resolve) => setTimeout(resolve, 650));
-    setIsLoading(false);
+    setState({ kind: "loading" });
+
+    let response: Response;
+    try {
+      response = await fetch("/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: trimmed, direction }),
+      });
+    } catch {
+      setState({ kind: "error" });
+      return;
+    }
+
+    if (!response.ok) {
+      setState({ kind: "error" });
+      return;
+    }
+
+    const data: TranslateResponse = await response.json();
+    setState(data.status === "NOT_FOUND" ? { kind: "not_found", data } : { kind: "success", data });
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -78,7 +98,7 @@ export default function TranslatorForm() {
           spellCheck={false}
           autoFocus
         />
-        <button className="ds-button" type="submit" disabled={isLoading}>
+        <button className="ds-button" type="submit" disabled={state.kind === "loading"}>
           Traduzir
         </button>
       </form>
@@ -100,14 +120,7 @@ export default function TranslatorForm() {
       </div>
 
       <div id="resultado" aria-live="polite">
-        {isLoading && (
-          <div className="ds-loading" aria-busy="true">
-            <span className="dot" />
-            <span className="dot" />
-            <span className="dot" />
-            a procurar no glossário<span className="sr-only"> — aguarde</span>
-          </div>
-        )}
+        <TranslationResult state={state} direction={direction} />
       </div>
     </>
   );
