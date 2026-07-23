@@ -8,7 +8,7 @@
 
 ## Como funciona
 
-Tradução **100% determinística** — sem IA, sem API paga, sem mágica: um glossário curado pela comunidade + regras linguísticas (gerúndio ⇌ "estar a", próclise ⇌ ênclise). O que não está no glossário vira um convite para contribuir.
+Tradução **100% determinística** — sem IA, sem API paga, sem mágica: um glossário curado pela comunidade (regras linguísticas pra frases — gerúndio ⇌ "estar a", próclise ⇌ ênclise — ainda em desenvolvimento). O que não está no glossário vira um convite para contribuir.
 
 Este repositório é o **frontend** (Next.js). A tradução acontece na [tugatobrasa-api](https://github.com/carloseorsantos/tugatobrasa-api) (Java 21 + Spring Boot), onde também vive o glossário.
 
@@ -48,9 +48,9 @@ npm run generate-types
 - [x] Fase 1 — Base da API + glossário inicial (~100 pares)
 - [x] Fase 2 — `POST /translate` + fluxo de termo não encontrado
 - [x] Fase 3 — Esta interface consumindo a API
-- [ ] Fase 4 — Tradução de frases (regras) + CI do glossário
+- [ ] Fase 4 — Tradução de frases (regras) + cache (CI e auto-merge dos dois repos já feitos; PR automático a partir de issues de novo termo também)
 - [ ] Fase 5 — Página do glossário + feedback
-- [x] Fase 6 — Deploy (front na Vercel, API no AWS Lightsail)
+- [x] Fase 6 — Deploy (front na Vercel, API no AWS Lightsail, auto-deploy do backend a cada merge)
 
 ## Licença
 
